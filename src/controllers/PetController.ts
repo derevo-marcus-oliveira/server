@@ -22,8 +22,6 @@ export class PetToAdd {
                 }
             });
 
-            console.log(pet);
-
             return response.json(pet);
         }
         catch (err){
@@ -50,11 +48,20 @@ export class PetToFind {
 export class PetToRemove {
     async handle (request: Request, response: Response) {
 
-        try {
+        const { id } = request.body;
 
+        try {
+            const pet = await client.pet.delete({
+                where: {
+                    id: id
+                }
+            });
+
+            return response.json(pet);
         }
         catch (err){
 
+            return response.json(err);
         }
     }
 }
@@ -63,11 +70,30 @@ export class PetToRemove {
 export class PetToUpdate {
     async handle (request: Request, response: Response) {
 
-        try {
+        const { id, animal, raca, idade, sexo, nome, observacao, preco, url } = request.body;
 
+        try {
+            const pet = await client.pet.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    animal : animal,
+                    raca : raca,
+                    idade : idade,
+                    sexo : sexo,
+                    nome : nome,
+                    observacao : observacao,
+                    preco : preco,
+                    url : url
+                }
+            });
+
+            return response.json(pet);
         }
         catch (err){
 
+            return response.json(err);
         }
     }
 }

@@ -3,7 +3,7 @@ import cors from 'cors';
 
 import { router } from './router';
 
-import { PetToAdd, PetToFind } from './controllers/PetController';
+import { PetToAdd, PetToFind, PetToRemove, PetToUpdate } from './controllers/PetController';
 
 const app = express();
 
@@ -23,6 +23,16 @@ router.post("/ToAdd", toAdd.handle)
 // Adicionar
 const toFind = new PetToFind();
 router.get("/ToFind", toFind.handle)
+
+// Adicionar
+const toRemove = new PetToRemove();
+router.delete("/ToRemove", toRemove.handle)
+
+
+// Adicionar
+const toUpdate = new PetToUpdate();
+router.put("/ToUpdate", toUpdate.handle)
+
 
 
 app.listen(4003, () => console.log("server is running on PORT 4003"))
